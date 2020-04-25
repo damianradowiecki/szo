@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import pl.dritms.db.DBHelper;
 
 public class RolesActivity extends AppCompatActivity {
@@ -25,11 +28,24 @@ public class RolesActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         getSupportActionBar().setTitle("");
 
+        FloatingActionButton fab = findViewById(R.id.floatingAddRoleButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAddRole(view);
+            }
+        });
+
         DBHelper db = new DBHelper(this);
     }
 
-    public void goToRoles(View view) {
+    public void goToBehaviours(View view) {
         Intent intent = new Intent(RolesActivity.this, BehavioursActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToAddRole(View view){
+        Intent intent = new Intent(RolesActivity.this, AddRoleActivity.class);
         startActivity(intent);
     }
 }

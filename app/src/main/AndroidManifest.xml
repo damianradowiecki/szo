@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BehavioursActivity"></activity>
+        <activity android:name=".AddBehaviourActivity"></activity>
+        <activity android:name=".AddRoleActivity" />
+        <activity android:name=".BehavioursActivity" />
         <activity android:name=".RolesActivity" />
         <activity
             android:name=".SettingsActivity"
