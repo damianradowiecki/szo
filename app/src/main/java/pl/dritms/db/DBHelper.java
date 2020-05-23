@@ -1,11 +1,19 @@
 package pl.dritms.db;
 
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.dritms.model.Behaviour;
+import pl.dritms.model.Role;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -23,8 +31,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table behaviour(" +
                 "id integer primary key autoincrement, " +
+                "roleId integer, " +
                 "name text," +
-                "description text" +
+                "description text," +
+                "FOREIGN KEY(roleId) REFERENCES role(id)" +
                 ")");
 
         db.execSQL("create table setting(" +
@@ -33,6 +43,82 @@ public class DBHelper extends SQLiteOpenHelper {
                 "value text" +
                 ")");
     }
+
+    public void addRole(String name, String description){
+        addRole(new Role(name, description));
+    }
+
+    public void addBehaviour(String name, String description, long roleId){
+        addBehaviour(new Behaviour(name, description, roleId));
+    }
+
+    public List<Role> getRoles(){
+        List<Role> roles = new ArrayList<>();
+        Cursor c = getRolesCursor();
+        while (c.moveToNext()){
+            roles.add(toRole(c));
+        }
+        return roles;
+    }
+
+    public List<Behaviour> getBehaviours(Role role){
+        return getBehaviours(role.getId());
+    }
+
+    public List<Behaviour> getBehaviours(long roleId){
+        List<Behaviour> behaviours = new ArrayList<>();
+        Cursor c = getBehavioursCursor(roleId);
+        while (c.moveToNext()){
+            behaviours.add(toBehaviour(c));
+        }
+        return behaviours;
+    }
+
+    private void addRole(Role role){
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert("role", null, toContentValues(role));
+    }
+
+    private void addBehaviour(Behaviour behaviour){
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert("behaviour", null, toContentValues(behaviour));
+    }
+
+    private Role toRole(Cursor c) {
+        return new Role(c.getLong(0), c.getString(1), c.getString(2));
+    }
+
+    private Behaviour toBehaviour(Cursor c) {
+        return new Behaviour(c.getLong(0), c.getLong(1), c.getString(1), c.getString(2));
+    }
+
+    private Cursor getRolesCursor(){
+        String [] columns = {"id", "name", "description"};
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query("role", columns, null, null, null, null, "id desc");
+    }
+
+    private Cursor getBehavioursCursor(long roleId){
+        String [] columns = {"id", "roleId", "name", "description"};
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query("role", columns, "roleId = " + roleId, null, null, null, "id desc");
+    }
+
+
+    private ContentValues toContentValues(Role role){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", role.getName());
+        contentValues.put("description", role.getDescription());
+        return contentValues;
+    }
+
+    private ContentValues toContentValues(Behaviour behaviour){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", behaviour.getName());
+        contentValues.put("description", behaviour.getDescription());
+        return contentValues;
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -8,13 +8,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import pl.dritms.db.DBHelper;
+import pl.dritms.model.Behaviour;
+import pl.dritms.model.Role;
 
 public class BehavioursActivity extends AppCompatActivity {
+
+    private long roleId;
+    ArrayAdapter<Behaviour> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +37,9 @@ public class BehavioursActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         getSupportActionBar().setTitle("");
 
-        FloatingActionButton fab = findViewById(R.id.floatingAddRoleButton);
+        /*
+        //TODO don't know why it is resolved to null... code is not compiled..
+        FloatingActionButton fab = findViewById(R.id.floatingAddBehaviourButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,12 +47,41 @@ public class BehavioursActivity extends AppCompatActivity {
             }
         });
 
+
+         */
+
         DBHelper db = new DBHelper(this);
 
+        roleId = (long)getIntent().getExtras().get("roleId");
+
+        loadBehaviours();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadBehaviours();
     }
 
     public void goToAddBehaviour(View view) {
         Intent intent = new Intent(BehavioursActivity.this, AddBehaviourActivity.class);
         startActivity(intent);
     }
+
+    private void loadBehaviours(){
+        DBHelper db = new DBHelper(this);
+
+        adapter = new ArrayAdapter<Behaviour>(this,android.R.layout.simple_list_item_1,db.getBehaviours(roleId)){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                TextView item = (TextView) super.getView(position,convertView,parent);
+                item.setTextColor(Color.WHITE);
+                return item;
+            }
+        };
+
+        final ListView listView = findViewById(R.id.rolesList);
+        listView.setAdapter(adapter);
+    }
+
 }

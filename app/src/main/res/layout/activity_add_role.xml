@@ -50,6 +50,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/roleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="hint" />
@@ -66,6 +67,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/roleDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="hint" />

@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/behavioursList"
+        android:id="@+id/rolesList"
         android:layout_width="409dp"
         android:layout_height="500dp"
         android:layout_marginBottom="1dp"
