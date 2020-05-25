@@ -37,19 +37,6 @@ public class BehavioursActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         getSupportActionBar().setTitle("");
 
-        /*
-        //TODO don't know why it is resolved to null... code is not compiled..
-        FloatingActionButton fab = findViewById(R.id.floatingAddBehaviourButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToAddBehaviour(view);
-            }
-        });
-
-
-         */
-
         DBHelper db = new DBHelper(this);
 
         roleId = (long)getIntent().getExtras().get("roleId");
@@ -65,6 +52,7 @@ public class BehavioursActivity extends AppCompatActivity {
 
     public void goToAddBehaviour(View view) {
         Intent intent = new Intent(BehavioursActivity.this, AddBehaviourActivity.class);
+        intent.putExtra("roleId", roleId);
         startActivity(intent);
     }
 
@@ -80,7 +68,7 @@ public class BehavioursActivity extends AppCompatActivity {
             }
         };
 
-        final ListView listView = findViewById(R.id.rolesList);
+        final ListView listView = findViewById(R.id.behavioursList);
         listView.setAdapter(adapter);
     }
 

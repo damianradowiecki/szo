@@ -101,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private Cursor getBehavioursCursor(long roleId){
         String [] columns = {"id", "roleId", "name", "description"};
         SQLiteDatabase db = getReadableDatabase();
-        return db.query("role", columns, "roleId = " + roleId, null, null, null, "id desc");
+        return db.query("behaviour", columns, "roleId = " + roleId, null, null, null, "id desc");
     }
 
 
