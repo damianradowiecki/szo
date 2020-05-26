@@ -14,6 +14,7 @@ import java.util.List;
 
 import pl.dritms.model.Behaviour;
 import pl.dritms.model.Role;
+import pl.dritms.model.Setting;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -23,13 +24,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table role(" +
+        db.execSQL("create table " + Role.TABLE_NAME + "(" +
                 "id integer primary key autoincrement, " +
                 "name text," +
                 "description text" +
                 ")");
 
-        db.execSQL("create table behaviour(" +
+        db.execSQL("create table " + Behaviour.TABLE_NAME + "(" +
                 "id integer primary key autoincrement, " +
                 "roleId integer, " +
                 "name text," +
@@ -37,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(roleId) REFERENCES role(id)" +
                 ")");
 
-        db.execSQL("create table setting(" +
+        db.execSQL("create table " + Setting.TABLE_NAME + "(" +
                 "id integer primary key autoincrement, " +
                 "name text," +
                 "value text" +
@@ -76,12 +77,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private void addRole(Role role){
         SQLiteDatabase db = getWritableDatabase();
-        db.insert("role", null, toContentValues(role));
+        db.insert(Role.TABLE_NAME, null, toContentValues(role));
     }
 
     private void addBehaviour(Behaviour behaviour){
         SQLiteDatabase db = getWritableDatabase();
-        db.insert("behaviour", null, toContentValues(behaviour));
+        db.insert(Behaviour.TABLE_NAME, null, toContentValues(behaviour));
     }
 
     private Role toRole(Cursor c) {
@@ -95,13 +96,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private Cursor getRolesCursor(){
         String [] columns = {"id", "name", "description"};
         SQLiteDatabase db = getReadableDatabase();
-        return db.query("role", columns, null, null, null, null, "id desc");
+        return db.query(Role.TABLE_NAME, columns, null, null, null, null, "id desc");
     }
 
     private Cursor getBehavioursCursor(long roleId){
         String [] columns = {"id", "roleId", "name", "description"};
         SQLiteDatabase db = getReadableDatabase();
-        return db.query("behaviour", columns, "roleId = " + roleId, null, null, null, "id desc");
+        return db.query(Behaviour.TABLE_NAME, columns, "roleId = " + roleId, null, null, null, "id desc");
     }
 
 
@@ -116,6 +117,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", behaviour.getName());
         contentValues.put("description", behaviour.getDescription());
+        contentValues.put("roleId", behaviour.getRoleId());
         return contentValues;
     }
 

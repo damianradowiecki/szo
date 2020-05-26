@@ -2,6 +2,8 @@ package pl.dritms.model;
 
 public class Setting {
 
+    public static final String TABLE_NAME = "setting";
+
     private long id;
     private String name;
     private String value;

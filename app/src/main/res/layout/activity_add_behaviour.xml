@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddBehaviourActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newRoleName"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="272dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <EditText
         android:id="@+id/behaviourDescriptionText"
         android:layout_width="wrap_content"
@@ -48,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/newBehaviourNameForRoleText"
@@ -84,27 +74,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="368dp">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/behaviourName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="358dp"
         android:hint="hint"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="328dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-4dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/behaviourDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="159dp"
         android:hint="hint"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="527dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

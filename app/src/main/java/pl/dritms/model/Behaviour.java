@@ -1,6 +1,9 @@
 package pl.dritms.model;
 
 public class Behaviour {
+
+    public static final String TABLE_NAME = "behaviour";
+
     private long id;
     private long roleId;
     private String name;
@@ -52,5 +55,10 @@ public class Behaviour {
 
     public void setRoleId(long roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " : " + this.description;
     }
 }

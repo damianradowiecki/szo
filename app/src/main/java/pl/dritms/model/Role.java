@@ -1,6 +1,9 @@
 package pl.dritms.model;
 
 public class Role {
+
+    public static final String TABLE_NAME = "role";
+
     private long id;
     private String name;
     private String description;
