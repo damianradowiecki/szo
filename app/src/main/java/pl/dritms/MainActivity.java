@@ -2,7 +2,9 @@ package pl.dritms;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -45,4 +47,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public  void putNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannel.DEFAULT_CHANNEL_ID)
+                .setContentTitle("Pamiętaj")
+                .setContentText("cos tam...")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+    }
 }
