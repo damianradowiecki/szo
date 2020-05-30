@@ -4,17 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static int FIVE_MINUTES = 1000 * 60 * 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +39,36 @@ public class MainActivity extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                finishAffinity();
                 System.exit(0);
             }
         });
+
+        scheduleNotification();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_settings) {
+            goToSettings();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void scheduleNotification () {
+        Intent notificationIntent = new Intent( this, MyReceiver.class ) ;
+        PendingIntent pendingIntent = PendingIntent. getBroadcast ( this, MyReceiver.REQUEST_CODE , notificationIntent , PendingIntent. FLAG_UPDATE_CURRENT ) ;
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
+        assert alarmManager != null;
+        alarmManager.set(AlarmManager. ELAPSED_REALTIME_WAKEUP , FIVE_MINUTES , pendingIntent) ;
     }
 
     public void goToRoles(View view) {
@@ -42,15 +76,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToSettings(View view) {
+    public void goToSettings() {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 
-    public  void putNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannel.DEFAULT_CHANNEL_ID)
-                .setContentTitle("Pamiętaj")
-                .setContentText("cos tam...")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-    }
 }

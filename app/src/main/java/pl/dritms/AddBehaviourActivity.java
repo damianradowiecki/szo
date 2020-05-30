@@ -25,7 +25,7 @@ public class AddBehaviourActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToBehaviours(view, roleId);
+                goToBehaviours(roleId);
             }
         });
 
@@ -63,10 +63,10 @@ public class AddBehaviourActivity extends AppCompatActivity {
         TextView behaviourNameTextView = findViewById(R.id.behaviourName);
         TextView behaviourDescriptionTextView = findViewById(R.id.behaviourDescription);
         dbHelper.addBehaviour(behaviourNameTextView.getText().toString(), behaviourDescriptionTextView.getText().toString(), roleId);
-        goToBehaviours(view, roleId);
+        goToBehaviours(roleId);
     }
 
-    public void goToBehaviours(View view, long roleId){
+    public void goToBehaviours(long roleId){
         Intent intent = new Intent(AddBehaviourActivity.this, BehavioursActivity.class);
         intent.putExtra("roleId", roleId);
         startActivity(intent);
