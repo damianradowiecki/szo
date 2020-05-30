@@ -1,8 +1,11 @@
 package pl.dritms;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,16 @@ public class AddBehaviourActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_behaviour);
+
+        ConstraintLayout constraintLayout = findViewById(R.id.add_behaviour_activity);
+        constraintLayout.setBackgroundColor(Color.BLACK);
+        ((TextView)findViewById(R.id.newBehaviourBaner)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.behaviourNameText)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.behaviourName)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.behaviourDescriptionText)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.behaviourDescription)).setTextColor(Color.WHITE);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        getSupportActionBar().setTitle("");
 
         Button cancelButton = findViewById(R.id.cancelAddBehaviourButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +66,7 @@ public class AddBehaviourActivity extends AppCompatActivity {
             throw new IllegalStateException();
         }
 
-        TextView title = findViewById(R.id.newBehaviourNameForRoleText);
+        TextView title = findViewById(R.id.newBehaviourBaner);
         title.setText("Nowe zachowanie dla roli - " + role.getName());
 
 

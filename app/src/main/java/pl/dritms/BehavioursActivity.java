@@ -40,6 +40,7 @@ public class BehavioursActivity extends AppCompatActivity {
         DBHelper db = new DBHelper(this);
 
         roleId = (long)getIntent().getExtras().get("roleId");
+        ((TextView)findViewById(R.id.role)).setText("(" + db.getRoleById(roleId).getName() + ")");
 
         loadBehaviours();
     }

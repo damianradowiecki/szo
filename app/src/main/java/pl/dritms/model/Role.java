@@ -48,6 +48,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return name + " : " + description;
+        return name + " (" + description + ")";
     }
 }

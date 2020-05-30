@@ -62,6 +62,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return roles;
     }
 
+    public Role getRoleById(long roleId){
+        for(Role r: getRoles()){
+            if(r.getId() == roleId){
+                return r;
+            }
+        }
+        throw new IllegalArgumentException("No role for id: " + roleId);
+    }
+
     public List<Behaviour> getBehaviours(Role role){
         return getBehaviours(role.getId());
     }
@@ -90,7 +99,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private Behaviour toBehaviour(Cursor c) {
-        return new Behaviour(c.getLong(0), c.getLong(1), c.getString(1), c.getString(2));
+        return new Behaviour(c.getLong(0), c.getLong(1), c.getString(2), c.getString(3));
     }
 
     private Cursor getRolesCursor(){

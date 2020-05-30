@@ -1,8 +1,11 @@
 package pl.dritms;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,17 @@ public class AddRoleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_role);
+
+        ConstraintLayout constraintLayout = findViewById(R.id.add_role_activity);
+        constraintLayout.setBackgroundColor(Color.BLACK);
+        ((TextView)findViewById(R.id.roleNameBaner)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.roleNameText)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.roleName)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.roleDescriptionText)).setTextColor(Color.WHITE);
+        ((TextView)findViewById(R.id.roleDescription)).setTextColor(Color.WHITE);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        getSupportActionBar().setTitle("");
+
 
         Button cancelButton = findViewById(R.id.cancelAddRoleButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {

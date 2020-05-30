@@ -33,7 +33,7 @@
     <ListView
         android:id="@+id/behavioursList"
         android:layout_width="409dp"
-        android:layout_height="500dp"
+        android:layout_height="350dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
