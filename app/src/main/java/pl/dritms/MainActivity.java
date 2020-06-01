@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
-
-        scheduleNotification();
     }
 
     @Override
@@ -60,15 +58,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-    private void scheduleNotification () {
-        Intent notificationIntent = new Intent( this, MyReceiver.class ) ;
-        PendingIntent pendingIntent = PendingIntent. getBroadcast ( this, MyReceiver.REQUEST_CODE , notificationIntent , PendingIntent. FLAG_UPDATE_CURRENT ) ;
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
-        assert alarmManager != null;
-        alarmManager.set(AlarmManager. ELAPSED_REALTIME_WAKEUP , FIVE_MINUTES , pendingIntent) ;
     }
 
     public void goToRoles(View view) {

@@ -11,10 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
 
-        <receiver
-            android:name=".MyReceiver"
-            android:enabled="true"
-            android:exported="true" />
         <receiver android:name=".ReminderWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -40,9 +36,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".NotificationIntentService"
-            android:exported="false"></service>
     </application>
 
 </manifest>
