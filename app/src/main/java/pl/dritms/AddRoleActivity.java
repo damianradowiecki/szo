@@ -23,13 +23,13 @@ public class AddRoleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_role);
 
         ConstraintLayout constraintLayout = findViewById(R.id.add_role_activity);
-        constraintLayout.setBackgroundColor(Color.BLACK);
-        ((TextView)findViewById(R.id.roleNameBaner)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.roleNameText)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.roleName)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.roleDescriptionText)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.roleDescription)).setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
+        ((TextView)findViewById(R.id.roleNameBaner)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.roleNameText)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.roleName)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.roleDescriptionText)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.roleDescription)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
 
 

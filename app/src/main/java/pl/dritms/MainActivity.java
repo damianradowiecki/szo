@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ConstraintLayout constraintLayout = findViewById(R.id.mainActivity);
-        constraintLayout.setBackgroundColor(Color.BLACK);
-        ((TextView)findViewById(R.id.titleBig)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.titleSmall)).setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
+        ((TextView)findViewById(R.id.titleBig)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.titleSmall)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
 
         Button exitButton = (Button) findViewById(R.id.exitButton);

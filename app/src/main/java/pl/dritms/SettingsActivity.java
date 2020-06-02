@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import pl.dritms.db.DBHelper;
+
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -27,22 +30,26 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
         ConstraintLayout constraintLayout = findViewById(R.id.settingsLayout);
-        constraintLayout.setBackgroundColor(Color.BLACK);
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
         TextView textView = findViewById(R.id.settings_1_switch);
-        textView.setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        textView.setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("Ustawienia");
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        SwitchPreferenceCompat d;
+        final DBHelper dbHelper = new DBHelper(this);
         Switch switch_ = findViewById(R.id.switch1);
+        switch_.setChecked(dbHelper.getSettingBoolean("darkMode"));
         switch_.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
-                System.out.println(isChecked);
+                if(isChecked){
+                    ColorGlobalSettings.BACKGROUND_COLOR = Color.BLACK;
+                    ColorGlobalSettings.TEXT_COLOR = Color.WHITE;
+                    dbHelper.updateSettings("darkMode", "true");
+                }
+                else{
+                    ColorGlobalSettings.BACKGROUND_COLOR = Color.LTGRAY;
+                    ColorGlobalSettings.TEXT_COLOR = Color.BLACK;
+                    dbHelper.updateSettings("darkMode", "false");
+                }
             }
         });
     }

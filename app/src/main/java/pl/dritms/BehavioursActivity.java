@@ -31,10 +31,10 @@ public class BehavioursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_behaviours);
 
         ConstraintLayout constraintLayout = findViewById(R.id.behavoiursActivity);
-        constraintLayout.setBackgroundColor(Color.BLACK);
-        ((TextView)findViewById(R.id.behavoiurs)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.role)).setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
+        ((TextView)findViewById(R.id.behavoiurs)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.role)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
 
         DBHelper db = new DBHelper(this);
@@ -74,7 +74,7 @@ public class BehavioursActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 TextView item = (TextView) super.getView(position,convertView,parent);
-                item.setTextColor(Color.WHITE);
+                item.setTextColor(ColorGlobalSettings.TEXT_COLOR);
                 return item;
             }
         };

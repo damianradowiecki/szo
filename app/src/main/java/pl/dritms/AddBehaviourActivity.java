@@ -25,13 +25,13 @@ public class AddBehaviourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_behaviour);
 
         ConstraintLayout constraintLayout = findViewById(R.id.add_behaviour_activity);
-        constraintLayout.setBackgroundColor(Color.BLACK);
-        ((TextView)findViewById(R.id.newBehaviourBaner)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.behaviourNameText)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.behaviourName)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.behaviourDescriptionText)).setTextColor(Color.WHITE);
-        ((TextView)findViewById(R.id.behaviourDescription)).setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
+        ((TextView)findViewById(R.id.newBehaviourBaner)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.behaviourNameText)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.behaviourName)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.behaviourDescriptionText)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        ((TextView)findViewById(R.id.behaviourDescription)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
 
         Button cancelButton = findViewById(R.id.cancelAddBehaviourButton);

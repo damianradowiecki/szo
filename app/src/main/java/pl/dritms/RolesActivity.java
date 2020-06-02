@@ -35,9 +35,9 @@ public class RolesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roles);
         ConstraintLayout constraintLayout = findViewById(R.id.rolesActivity);
-        constraintLayout.setBackgroundColor(Color.BLACK);
-        ((TextView)findViewById(R.id.roles)).setTextColor(Color.WHITE);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        constraintLayout.setBackgroundColor(ColorGlobalSettings.BACKGROUND_COLOR);
+        ((TextView)findViewById(R.id.roles)).setTextColor(ColorGlobalSettings.TEXT_COLOR);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
 
         FloatingActionButton fab = findViewById(R.id.floatingAddRoleButton);
@@ -85,7 +85,7 @@ public class RolesActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 TextView item = (TextView) super.getView(position,convertView,parent);
-                item.setTextColor(Color.WHITE);
+                item.setTextColor(ColorGlobalSettings.TEXT_COLOR);
                 return item;
             }
         };

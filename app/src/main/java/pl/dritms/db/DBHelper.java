@@ -43,6 +43,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "name text," +
                 "value text" +
                 ")");
+        db.execSQL(
+                "insert into " + Setting.TABLE_NAME + "(name, value) values ('darkMode', 'true')"
+        );
     }
 
     public void addRole(String name, String description){
@@ -134,5 +137,45 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    private long getSettingId(String name) {
+        Cursor c = getSettingsCursor();
+        while (c.moveToNext()){
+            if(c.getString(1).equalsIgnoreCase(name)){
+                return c.getLong(0);
+            }
+        }
+        throw new IllegalArgumentException("There is no setting with " + name);
+    }
+
+    public String getSetting(String name) {
+        Cursor c = getSettingsCursor();
+        while (c.moveToNext()){
+            if(c.getString(1).equalsIgnoreCase(name)){
+                return c.getString(2);
+            }
+        }
+        throw new IllegalArgumentException("There is no setting with " + name);
+    }
+
+    public boolean getSettingBoolean(String name) {
+        return getSetting(name).equals("true");
+    }
+
+    public void updateSettings(String name, String value) {
+        long settingId = getSettingId(name);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", settingId);
+        contentValues.put("name", name);
+        contentValues.put("value", value);
+        SQLiteDatabase db = getWritableDatabase();
+        db.update(Setting.TABLE_NAME, contentValues, "id = " + settingId,null );
+    }
+
+    private Cursor getSettingsCursor(){
+        String [] columns = {"id", "name", "value"};
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query(Setting.TABLE_NAME, columns,null, null, null, null, null);
     }
 }
