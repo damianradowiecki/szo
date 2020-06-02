@@ -52,9 +52,19 @@ public class RolesActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        goToMainActivity();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         loadRoles();
+    }
+
+    public void goToMainActivity() {
+        Intent intent = new Intent(RolesActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void goToBehaviours(View view, long roleId) {

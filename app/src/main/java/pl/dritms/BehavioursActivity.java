@@ -46,6 +46,11 @@ public class BehavioursActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        goToRoles();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         loadBehaviours();
@@ -54,6 +59,11 @@ public class BehavioursActivity extends AppCompatActivity {
     public void goToAddBehaviour(View view) {
         Intent intent = new Intent(BehavioursActivity.this, AddBehaviourActivity.class);
         intent.putExtra("roleId", roleId);
+        startActivity(intent);
+    }
+
+    public void goToRoles(){
+        Intent intent = new Intent(BehavioursActivity.this, RolesActivity.class);
         startActivity(intent);
     }
 

@@ -72,6 +72,11 @@ public class AddBehaviourActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        goToBehaviours(roleId);
+    }
+
     private void saveAndGoToBehaviours(View view, long roleId) {
         TextView behaviourNameTextView = findViewById(R.id.behaviourName);
         TextView behaviourDescriptionTextView = findViewById(R.id.behaviourDescription);

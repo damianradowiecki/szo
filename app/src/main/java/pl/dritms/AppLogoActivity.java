@@ -23,6 +23,12 @@ public class AppLogoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        System.exit(0);
+    }
+
     static class CanvasView extends View
     {
         private Context context;

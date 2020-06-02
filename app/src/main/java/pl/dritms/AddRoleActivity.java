@@ -37,7 +37,7 @@ public class AddRoleActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToRoles(view);
+                goToRoles();
             }
         });
 
@@ -52,14 +52,19 @@ public class AddRoleActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        goToRoles();
+    }
+
     private void saveAndGoToRoles(View view) {
         TextView roleNameTextView = findViewById(R.id.roleName);
         TextView roleDescriptionTextView = findViewById(R.id.roleDescription);
         dbHelper.addRole(roleNameTextView.getText().toString(), roleDescriptionTextView.getText().toString());
-        goToRoles(view);
+        goToRoles();
     }
 
-    public void goToRoles(View view){
+    public void goToRoles(){
         Intent intent = new Intent(AddRoleActivity.this, RolesActivity.class);
         startActivity(intent);
     }
