@@ -1,5 +1,6 @@
 package pl.dritms;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,11 +21,11 @@ public class AppLogoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        readColorMode();
         super.onCreate(savedInstanceState);
         setContentView(new CanvasView(this));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ColorGlobalSettings.BACKGROUND_COLOR));
         getSupportActionBar().setTitle("");
-        readColorMode();
     }
 
     private void readColorMode() {
@@ -62,6 +64,7 @@ public class AppLogoActivity extends AppCompatActivity {
             return super.onTouchEvent(event);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected void onDraw(Canvas canvas)
         {
@@ -75,7 +78,16 @@ public class AppLogoActivity extends AppCompatActivity {
 
             int xPos = (int) (getWidth() / 2 - text.length()/2 * textSize);
             int yPos = (int) ((getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2)) ;
-            canvas.drawARGB(255, 0, 0, 0);
+
+            Color backgroundColor = Color.valueOf(ColorGlobalSettings.BACKGROUND_COLOR);
+            int alpha;
+            if(ColorGlobalSettings.BACKGROUND_COLOR == Color.BLACK){
+                alpha = 255;
+            }
+            else{
+                alpha = 50;
+            }
+            canvas.drawARGB(alpha, (int)backgroundColor.red(), (int)backgroundColor.green(), (int)backgroundColor.blue());
             canvas.drawText(text, xPos, yPos, paint);
         }
 
